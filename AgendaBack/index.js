@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
+app.use(express.static('dist'))
 app.use(cors())
 
 app.use(express.json()) /* Con este le decimos que soporte las request y luego las parsee para tenerlo disponible en el request.body */
