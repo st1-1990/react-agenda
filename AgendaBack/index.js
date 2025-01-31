@@ -121,7 +121,7 @@ app.get('/api/personas', (request, response) => {
       response.json(person) */
 
       const persona = new Agenda({
-        name: person.mame,
+        name: person.name,
         number: person.number 
       })
     
