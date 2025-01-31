@@ -69,7 +69,7 @@ app.get('/api/personas', (request, response) => {
   })
 
   app.get('/api/persons/:id', (request, response) => { 
-    const id = Number(request.params.id  )           /* leminamos un nota, pero para esto se necesita de una herramienta como postman o REST Clinet */
+/*     const id = Number(request.params.id  )          
     const personita = personas.find(p => p.id === id)
     
     if(personita){
@@ -77,8 +77,12 @@ app.get('/api/personas', (request, response) => {
         response.json(personita)
     }else {
         response.status(404).end()
-    }
-        
+    } 
+         */
+
+    Agenda.findById(request.params.id).then(agenda => {
+      response.json(agenda)
+    })
   })
 
   app.delete('/api/persons/:id', (request, response) => {
@@ -104,7 +108,7 @@ app.get('/api/personas', (request, response) => {
           })
       }
   
-      const ids = personas.map(p => p.id)
+/*       const ids = personas.map(p => p.id)
       const maxId = Math.max (...ids)
   
       const newPerson = {
@@ -114,8 +118,17 @@ app.get('/api/personas', (request, response) => {
       }
       personas = personas.concat(newPerson)
 
-      response.json(person)
-    });
+      response.json(person) */
+
+      const persona = new Agenda({
+        name: person.mame,
+        number: person.number 
+      })
+    
+      persona.save().then(savedPersona => {
+        response.json(savedPersona)
+    })
+  })
   
 
   /* const PORT = 3001 */
@@ -123,4 +136,4 @@ app.get('/api/personas', (request, response) => {
   app.listen(PORT, () => {     /** Aca se pasa un callback ya que el servidor ne inicia de forma asincrona, osea que le decimos que cuando termine de ejecutar el servidor ejecute el conslo.log*/
     console.log(`Server running on port ${PORT}`)
   })
-
+    
